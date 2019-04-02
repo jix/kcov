@@ -185,18 +185,6 @@ void ptrace_sys::detach(pid_t pid)
 
 bool ptrace_sys::disable_aslr(void)
 {
-	int persona = personality(0xffffffff);
-	if (persona < 0)
-	{
-		perror("Can't get personality");
-		return false;
-	}
-	persona |= 0x0040000; /* ADDR_NO_RANDOMIZE */
-	if (personality(persona) < 0)
-	{
-		perror("Can't set personality");
-		return false;
-	}
 	return true;
 }
 
